@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <PageTitle text="Chart View"/>
+    <PageTitle text="台灣確診疫情統計圖"/>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <PageTitle text="Home View"/>
+    <PageTitle text="台灣當日新增疫情一覽"/>
   </div>
 </template>
 

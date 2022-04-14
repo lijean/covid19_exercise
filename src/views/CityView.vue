@@ -1,6 +1,6 @@
 <template>
   <div class="city">
-    <PageTitle text="City View"/>
+    <PageTitle text="台灣各縣市確診案例"/>
   </div>
 </template>
 
