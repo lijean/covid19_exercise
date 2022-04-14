@@ -14,7 +14,9 @@
       </div>
   </nav>
   <div class="container">
-    <router-view/>
+    <router-view :dataList="dataList"
+                  :latestDate="latestDate"
+                  :taiwanList="taiwanList"/>
   </div>
   <footer>
     <div class="container border-top py-3 text-center">
@@ -29,11 +31,53 @@
 </template>
 
 <script>
+const api = './covid19.json'
 export default {
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      dataList: [],
+      latestDate: '',
+      taiwanList: [
+        '境外移入', '台北市', '新北市', '基隆市', '宜蘭縣', '桃園市',
+        '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '南投縣',
+        '雲林縣', '嘉義市', '嘉義縣', '台南市', '高雄市', '屏東縣',
+        '花蓮縣', '台東縣', '澎湖縣', '連江縣', '金門縣'
+      ]
     }
+  },
+  methods: {
+    getData () {
+      const vm = this
+      vm.isLoading = true
+
+      this.$http.get(api)
+        .then(response => {
+          vm.dataList = response.data.sort((a, b) => a.id - b.id)
+            .map(({ id, a02, a03, a04, a05, a06, a07 }) => {
+              return {
+                id: id,
+                date: a02,
+                city: a03,
+                town: a04 === '空值' ? '' : a04,
+                gender: a05,
+                overseas: a06 === '是',
+                age: a07
+              }
+            })
+
+          // 最新日期
+          vm.latestDate = vm.dataList[0].date
+
+          // Loading
+          setTimeout(() => {
+            vm.isLoading = false
+          }, 1000)
+        })
+    }
+  },
+  mounted () {
+    this.getData()
   }
 }
 </script>
