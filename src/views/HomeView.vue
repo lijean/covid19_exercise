@@ -2,7 +2,7 @@
   <div class="home">
     <PageTitle text="台灣當日新增疫情一覽"/>
     <div class="main">
-      <CardItem :itemList="confirmedNumList"/>
+      <CardItem class="mb-4" :itemList="confirmedNumList"/>
     </div>
   </div>
 </template>
