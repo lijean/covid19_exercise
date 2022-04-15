@@ -2,7 +2,7 @@
   <div class="city">
     <PageTitle text="台灣各縣市確診案例"/>
     <div class="main">
-      <ButtonFilter class="mb-5"
+      <ButtonFilter class="mb-3"
                     :itemList="cityLocalList"
                     :itemIndex="cityCurrentIndex"
                     @filter="changeIndexHandler"/>
