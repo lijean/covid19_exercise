@@ -9,6 +9,10 @@
                   :itemDate="latestDate"
                   itemText="確診人數"
                   :itemList="cityOrderList"/>
+        <MapItem class="col-xl-8 col-12 mb-4"
+                  itemTitle="台灣縣市疫情地圖"
+                  :itemDate="latestDate"
+                  :itemList="cityConfirmedList"/>
       </div>
     </div>
   </div>
@@ -18,13 +22,15 @@
 import PageTitle from '@/components/PageTitle.vue'
 import CardItem from '@/components/CardItem.vue'
 import OrderItem from '@/components/OrderItem.vue'
+import MapItem from '@/components/MapItem.vue'
 
 export default {
   name: 'HomeView',
   components: {
     PageTitle,
     CardItem,
-    OrderItem
+    OrderItem,
+    MapItem
   },
   props: {
     dataList: Array,
