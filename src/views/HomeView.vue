@@ -10,13 +10,14 @@
       <CardItem class="mb-4" :itemList="confirmedNumList"/>
       <div class="row align-items-start py-5">
         <OrderItem class="col-xl-4 col-12 mb-4"
-                  itemTitle="累計確診排行"
-                  :itemDate="latestDate"
+                  itemTitle="當日確診排行"
+                  :itemDate="selectDate"
                   itemText="確診人數"
-                  :itemList="cityOrderList"/>
-        <MapItem class="col-xl-8 col-12 mb-4"
-                  itemTitle="台灣縣市疫情地圖"
-                  :itemDate="latestDate"
+                  :itemList="cityOrderList"
+                  v-if="cityOrderList.length>0"/>
+        <MapItem class="col-xl-8 col-12 mb-4 flex-lg-grow-1"
+                  itemTitle="當日縣市疫情地圖"
+                  :itemDate="selectDate"
                   :itemList="cityConfirmedList"/>
       </div>
     </div>
@@ -104,7 +105,7 @@ export default {
       const filterList = this.cityList.sort
         .map(item => {
           const obj = this.cityList.map[item]
-          const arr = obj.sort.filter(item2 => obj.map[item2].date <= this.latestDate)
+          const arr = obj.sort.filter(item2 => obj.map[item2].date === this.selectDate)
           return {
             title: item,
             num: arr.length
@@ -115,6 +116,7 @@ export default {
     cityOrderList () {
       const filterList = this.cityConfirmedList
         .filter((item, idx) => idx !== 0)
+        .filter(({ num }) => num > 0)
         .sort((a, b) => b.num - a.num)
         .map(({ title, num }) => {
           return {
