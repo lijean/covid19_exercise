@@ -59,12 +59,12 @@ export default {
         },
         {
           title: '當日本土新增(例)',
-          num: this.currencyHandler(this.todayLocal),
+          num: (this.todayLocal !== 0 ? '+ ' : '') + this.currencyHandler(this.todayLocal),
           text: this.latestDate
         },
         {
           title: '當日境外移入(例)',
-          num: this.currencyHandler(this.todayOverseas),
+          num: (this.todayOverseas !== 0 ? '+ ' : '') + this.currencyHandler(this.todayOverseas),
           text: this.latestDate
         }
       ]
