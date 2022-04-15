@@ -1,6 +1,6 @@
 <template>
-  <div class="pageTitle">
-    <h1>{{ text }}</h1>
+  <div class="pageTitle text-center py-5 mb-3">
+    <h1 class="fs-1 fw-bold mb-0">{{ text }}</h1>
   </div>
 </template>
 
