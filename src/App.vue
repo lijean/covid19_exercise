@@ -54,10 +54,10 @@ export default {
       this.$http.get(api)
         .then(response => {
           vm.dataList = response.data.sort((a, b) => a.id - b.id)
-            .map(({ id, a02, a03, a04, a05, a06, a07 }) => {
+            .map(({ id, a01, a03, a04, a05, a06, a07 }) => {
               return {
                 id: id,
-                date: a02,
+                date: a01,
                 city: a03,
                 town: a04 === '空值' ? '' : a04,
                 gender: a05,
