@@ -2,11 +2,6 @@
   <div class="home">
     <PageTitle text="台灣當日新增疫情一覽"/>
     <div class="main">
-      <div class="selectDate ms-auto d-flex mb-4">
-          <button class="btn btn-secondary" v-show="selectDate!==minDate" @click="changeDate(1)">←</button>
-          <input type="date" class="form-control form-control-sm" v-model.trim="selectDate" :max="latestDate" :min="minDate">
-          <button class="btn btn-secondary" v-show="selectDate!==latestDate" @click="changeDate(-1)">→</button>
-      </div>
       <CardItem class="mb-4" :itemList="confirmedNumList"/>
       <div class="row align-items-start py-5">
         <OrderItem class="col-xl-4 col-12 mb-4"
@@ -43,20 +38,12 @@ export default {
     latestDate: String,
     taiwanList: Array
   },
-  data () {
-    return {
-      selectDate: ''
-    }
-  },
   computed: {
-    minDate () {
-      return this.dataList[this.dataList.length - 1].date
-    },
     totalConfirmed () {
-      return this.dataList.filter(({ date }) => date <= this.selectDate).length
+      return this.dataList.filter(({ date }) => date <= this.latestDate).length
     },
     todayList () {
-      return this.dataList.filter(({ date }) => date === this.selectDate)
+      return this.dataList.filter(({ date }) => date === this.latestDate)
     },
     todayLocal () {
       return this.todayList.filter(({ overseas }) => !overseas).length
@@ -69,17 +56,17 @@ export default {
         {
           title: '累計總確診(例)',
           num: this.currencyHandler(this.totalConfirmed),
-          text: this.selectDate
+          text: this.latestDate
         },
         {
           title: '當日本土新增(例)',
           num: (this.todayLocal !== 0 ? '+ ' : '') + this.currencyHandler(this.todayLocal),
-          text: this.selectDate
+          text: this.latestDate
         },
         {
           title: '當日境外移入(例)',
           num: (this.todayOverseas !== 0 ? '+ ' : '') + this.currencyHandler(this.todayOverseas),
-          text: this.selectDate
+          text: this.latestDate
         }
       ]
     },
@@ -154,24 +141,7 @@ export default {
       const parts = value.toString().split('.')
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       return parts.join('.')
-    },
-    changeDate (change) {
-      // 切換日期
-      const dateList = this.dateList.sort
-      const idx = (dateList.indexOf(this.selectDate) + change + dateList.length) % dateList.length
-      this.selectDate = dateList[idx]
     }
-  },
-  mounted () {
-    this.selectDate = this.latestDate
   }
 }
 </script>
-
-<style scoped lang="scss">
-.selectDate {
-  @media (min-width: 481px) {
-    max-width: 300px;
-  }
-}
-</style>
