@@ -7,6 +7,10 @@
                     :itemIndex="cityCurrentIndex"
                     @filter="changeIndexHandler"/>
       <div class="row align-items-start py-5">
+        <div class="col-xl-5 col-12 mb-4 mt-3">
+          <DoughnutChart :chartData="chartData" />
+        </div>
+
         <div class="col-xl-7 col-12">
 
           <div class="d-flex flex-wrap justify-content-end justify-content-xl-start mb-3">
@@ -61,13 +65,15 @@
 import PageTitle from '@/components/PageTitle.vue'
 import ButtonFilter from '@/components/BtnFilter.vue'
 import ButtonPagination from '@/components/BtnPagination.vue'
+import DoughnutChart from '@/components/DoughnutChart.vue'
 
 export default {
   name: 'CityView',
   components: {
     PageTitle,
     ButtonFilter,
-    ButtonPagination
+    ButtonPagination,
+    DoughnutChart
   },
   props: {
     dataList: Array,
@@ -141,6 +147,52 @@ export default {
     },
     totalPages () {
       return Math.ceil(this.localList.length / this.perPage)
+    },
+    chartData () {
+      let labels = []; let dataList = []
+      if (this.cityCurrentIndex >= this.cityPrevList.length) {
+        const obj = {
+          sort: [],
+          map: {}
+        }
+        this.dataList
+          .filter(({ city }) => city === this.cityList.sort[this.cityCurrentIndex])
+          .forEach(({ id, date, town }) => {
+            if (!obj.map[town]) {
+              obj.sort.push(town)
+              obj.map[town] = {
+                sort: [],
+                map: {}
+              }
+            }
+
+            obj.map[town].sort.push(id)
+            obj.map[town].map[id] = { date }
+          })
+
+        labels = obj.sort
+          .sort((a, b) => obj.map[b].sort.length - obj.map[a].sort.length)
+
+        dataList = labels.map((item) => obj.map[item].sort.length)
+      } else {
+        labels = this.cityList.sort
+          .filter((item, index) => index !== 0)
+          .sort((a, b) => this.cityList.map[b].sort.length - this.cityList.map[a].sort.length)
+        dataList = labels.map((item) => this.cityList.map[item].sort.length)
+      }
+
+      const colorList = ['#6366e0', '#e8537a', '#dc3545', '#fd7e14', '#ebcd71', '#20c997', '#67acd6']
+      const bgColor = labels.map((item, index) => colorList[((index + colorList.length) % colorList.length)])
+
+      return {
+        labels: labels,
+        datasets: [
+          {
+            backgroundColor: bgColor,
+            data: dataList
+          }
+        ]
+      }
     }
   },
   methods: {
