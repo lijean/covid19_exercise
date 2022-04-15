@@ -97,6 +97,12 @@ export default {
       const filterList = this.cityConfirmedList
         .filter((item, idx) => idx !== 0)
         .sort((a, b) => b.num - a.num)
+        .map(({ title, num }) => {
+          return {
+            title: title,
+            num: this.currencyHandler(num)
+          }
+        })
         .slice(0, 4)
       return filterList
     }
