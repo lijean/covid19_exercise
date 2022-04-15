@@ -31,8 +31,8 @@ export default {
   methods: {
     colorStyleList (num) {
       const colorList = ['danger', 'primary', 'secondary']
-      if (num >= 1000) return colorList[0]
-      else if (num >= 100) return colorList[1]
+      if (num >= 100) return colorList[0]
+      else if (num > 0) return colorList[1]
       else return colorList[2]
     }
   }
