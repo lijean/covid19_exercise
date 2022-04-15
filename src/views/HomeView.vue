@@ -2,7 +2,7 @@
   <div class="home">
     <PageTitle text="台灣當日新增疫情一覽"/>
     <div class="main">
-      <CardItem :itemList="confirmedNumList"/>
+      <CardItem class="mb-4" :itemList="confirmedNumList"/>
       <div class="row align-items-start py-5">
         <OrderItem class="col-xl-4 col-12 mb-4"
                   itemTitle="累計確診排行"

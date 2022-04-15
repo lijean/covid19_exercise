@@ -1,5 +1,5 @@
 <template>
-    <div class="cardItem row mt-4">
+    <div class="cardItem row">
         <div class="col-xl-4 col-12 mb-3" v-for="item,index of itemList" :key="item.title">
             <div class="card rounded-3 text-center">
               <div class="card-header py-3 text-white" :class="[`bg-${colorStyleList(index)}`]">
