@@ -3,6 +3,13 @@
     <PageTitle text="台灣當日新增疫情一覽"/>
     <div class="main">
       <CardItem :itemList="confirmedNumList"/>
+      <div class="row align-items-start py-5">
+        <OrderItem class="col-xl-4 col-12 mb-4"
+                  itemTitle="累計確診排行"
+                  :itemDate="latestDate"
+                  itemText="確診人數"
+                  :itemList="cityOrderList"/>
+      </div>
     </div>
   </div>
 </template>
@@ -10,12 +17,14 @@
 <script>
 import PageTitle from '@/components/PageTitle.vue'
 import CardItem from '@/components/CardItem.vue'
+import OrderItem from '@/components/OrderItem.vue'
 
 export default {
   name: 'HomeView',
   components: {
     PageTitle,
-    CardItem
+    CardItem,
+    OrderItem
   },
   props: {
     dataList: Array,
@@ -53,6 +62,43 @@ export default {
           text: this.latestDate
         }
       ]
+    },
+    cityList () {
+      const obj = {
+        sort: this.taiwanList,
+        map: {}
+      }
+      obj.sort.forEach(city => {
+        obj.map[city] = {
+          sort: [],
+          map: {}
+        }
+      })
+      this.dataList.forEach(({ id, date, city, town, gender, overseas, age }) => {
+        obj.map[city].sort.push(id)
+        obj.map[city].map[id] = { date, town, gender, overseas, age }
+      })
+
+      return obj
+    },
+    cityConfirmedList () {
+      const filterList = this.cityList.sort
+        .map(item => {
+          const obj = this.cityList.map[item]
+          const arr = obj.sort.filter(item2 => obj.map[item2].date <= this.latestDate)
+          return {
+            title: item,
+            num: arr.length
+          }
+        })
+      return filterList
+    },
+    cityOrderList () {
+      const filterList = this.cityConfirmedList
+        .filter((item, idx) => idx !== 0)
+        .sort((a, b) => b.num - a.num)
+        .slice(0, 4)
+      return filterList
     }
   },
   methods: {
