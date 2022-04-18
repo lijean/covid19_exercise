@@ -1,0 +1,179 @@
+@import "~bootstrap/scss/functions";
+@import "helpers/variables";
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+#app {
+  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+}
+nav {
+  .nav-link {
+    position: relative;
+    padding: 0 10px;
+    color: $dark;
+    text-decoration: none;
+    &.router-link-exact-active {
+      color: $primary;
+    }
+  }
+}
+::selection {
+  background: $primary;
+  color: $white;
+}
+::-moz-selection {
+  background: $primary;
+  color: $white;
+}
+
+
+.chartBox {
+    position: relative;
+    .chartItem {
+      width: 100%;
+      transition: all .4s;
+      &:not(.show) {
+        opacity: 0;
+        visibility: hidden;
+      }
+      &:not(:first-child) {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  
+.map {
+    position: relative;
+}
+[class*='mapTarget'] {
+    position: absolute;
+    z-index: 5;
+    line-height: 1.2;
+    cursor: pointer;
+    pointer-events: auto;
+    > span {
+        margin-top: 3pt;
+        font-size: 0.8rem;
+    }
+}
+.mapTarget {
+    &List {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding-left: 0;
+        list-style: none;
+        pointer-events: none;
+    }
+    &0 {
+        bottom: 5px;
+        left: 5px;
+        padding: 10px;
+        border: 1px solid var(--bs-gray-400);
+        border-radius: 3px;
+    }
+    &1 {
+        top: 1%;
+        right: 14%;
+    }
+    &2 {
+        top: 9.5%;
+        right: 10%;
+    }
+    &3 {
+        top: 0;
+        right: -2%;
+    }
+    &4 {
+        top: 19.5%;
+        right: 6.5%;
+    }
+    &5 {
+        top: 5%;
+        right: 28%;
+    }
+    &6 {
+        top: 12%;
+        right: 36%;
+    }
+    &7 {
+        top: 15%;
+        right: 24%;
+    }
+    &8  {
+        top: 21.5%;
+        right: 33.5%;
+    }
+    &9 {
+        top: 29.5%;
+        right: 40%;
+    }
+    &10 {
+        top: 37%;
+        right: 51%;
+    }
+    &11 {
+        top: 40.5%;
+        right: 30%;
+    }
+    &12 {
+        top: 44.5%;
+        right: 51%;
+    }
+    &13 {
+        top: 51%;
+        right: 53%;
+    }
+    &14 {
+        top: 52%;
+        right: 39%;
+    }
+    &15 {
+        top: 60.5%;
+        right: 53%;
+    }
+    &16 {
+        top: 66%;
+        right: 40%;
+    }
+    &17 {
+        top: 78%;
+        right: 43%;
+    }
+    &18 {
+        top: 43%;
+        right: 11.5%;
+    }
+    &19 {
+        top: 69%;
+        right: 25%;
+    }
+    &20 {
+        top: 47%;
+        left: 12%;
+    }
+    &21 {
+        top: 3.5%;
+        left: 32%;
+    }
+    &22 {
+        top: 26%;
+        left: 18%;
+    }
+}
+
+
+.icon {
+    line-height: 1;
+    text-align: center;
+    &-shape {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
