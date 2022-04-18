@@ -40,15 +40,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.icon {
-    line-height: 1;
-    text-align: center;
-    &-shape {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-    }
-}
-</style>

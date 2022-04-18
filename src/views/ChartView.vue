@@ -171,22 +171,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.chartBox {
-  position: relative;
-  .chartItem {
-    width: 100%;
-    transition: all .4s;
-    &:not(.show) {
-      opacity: 0;
-      visibility: hidden;
-    }
-    &:not(:first-child) {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  }
-}
-</style>

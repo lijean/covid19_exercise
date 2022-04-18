@@ -83,31 +83,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~bootstrap/scss/functions";
-@import "./assets/helpers/variables";
-@import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
-
-#app {
-  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
-}
-nav {
-  .nav-link {
-    position: relative;
-    padding: 0 10px;
-    color: $dark;
-    text-decoration: none;
-    &.router-link-exact-active {
-      color: $primary;
-    }
-  }
-}
-::selection {
-  background: $primary;
-  color: $white;
-}
-::-moz-selection {
-  background: $primary;
-  color: $white;
-}
+@import "./assets/style";
 </style>
